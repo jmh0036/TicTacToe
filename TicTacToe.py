@@ -60,10 +60,14 @@ def PrintBoard(CurrentGame):
             print('---|---|---'.center(TermWidth))
     print('')
 
-# Get a valid input.  Takes no arguments, but returns the row and column the user inputs
-def GetInput():
+# Get a valid input.  Takes in what round we are on, and returns the row and column the user inputs
+def GetInput(round):
     while True:
             try:
+                if round%2 == 0:
+                    print('Player X, please choose your location.')
+                else:
+                    print('Player O, please choose your location.')
                 moveRow = int(input("Please enter the row of your next move (0,1, or 2): "))
                 moveCol = int(input("Please enter the column of your next move (0,1, or 2): "))
                 break
@@ -79,7 +83,7 @@ PrintBoard(Gameboard)
 turn = 0
 # Keep playing until either there is a winner or every position has been played on
 while (CheckWinner(Gameboard) == 'No Winner') and turn < len(Gameboard)**2:
-    Input = GetInput()
+    Input = GetInput(turn)
     # Make sure that the integer input is within our field of play (3 by 3)
     while Input[0] not in range(len(Gameboard)) or Input[1] not in range(len(Gameboard)):
         if Input[0] not in range(len(Gameboard)) and Input[1] not in range(len(Gameboard)):
@@ -94,14 +98,14 @@ while (CheckWinner(Gameboard) == 'No Winner') and turn < len(Gameboard)**2:
             print('')
             print('Column input is not a valid location.')
             PrintBoard(Gameboard)
-        Input = GetInput()
+        Input = GetInput(turn)
 
     # Make sure that the position is not already occupied
     while Gameboard[Input[0]][Input[1]] != ' ':
         print('')
         print('There is already a token in that location.  Please choose another location')
         PrintBoard(Gameboard)
-        Input = GetInput()
+        Input = GetInput(turn)
     
     # Alternate player's turn
     if turn%2 == 0:
