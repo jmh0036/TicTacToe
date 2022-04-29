@@ -12,9 +12,11 @@ TermWidth = os.get_terminal_size().columns
 
 # Check if there is a winner.
 def CheckWinner(CurrentGame):
+    Dimension = len(CurrentGame)
+
     # Winning Triples
-    Xwins = ['X','X','X']
-    Owins = ['O','O','O']
+    Xwins = ['X' for i in range(Dimension)]
+    Owins = ['O' for i in range(Dimension)]
 
     # Check rows
     for i in CurrentGame:
@@ -24,8 +26,8 @@ def CheckWinner(CurrentGame):
             return 'O wins'
 
     # Check Columns
-    for col in range(len(CurrentGame)):
-        ThreeCheck = [CurrentGame[row][col] for row in range(len(CurrentGame))]
+    for col in range(Dimension):
+        ThreeCheck = [CurrentGame[row][col] for row in range(Dimension)]
         if ThreeCheck == Xwins:
             return 'X wins'
         if ThreeCheck == Owins:
@@ -33,13 +35,13 @@ def CheckWinner(CurrentGame):
 
     # Check Diagonals
     # Forward Diagonal
-    ForwardDiag = [CurrentGame[0][0], CurrentGame[1][1], CurrentGame[2][2]]
+    ForwardDiag = [CurrentGame[i][i] for i in range(Dimension)]
     if ForwardDiag == Xwins:
         return 'X wins'
     if ForwardDiag == Owins:
         return 'O wins'
     # Backwards Diagonal
-    BackDiag = [CurrentGame[0][2], CurrentGame[1][1], CurrentGame[2][0]]
+    BackDiag = [CurrentGame[i][Dimension-i-1] for i in range(Dimension)]
     if BackDiag == Xwins:
         return 'X wins'
     if BackDiag == Owins:
@@ -68,8 +70,8 @@ def GetInput(round):
                     print('Player X, please choose your location.')
                 else:
                     print('Player O, please choose your location.')
-                moveRow = int(input("Please enter the row of your next move (0,1, or 2): "))
-                moveCol = int(input("Please enter the column of your next move (0,1, or 2): "))
+                moveRow = int(input("Please enter the row of your next move (0, 1, or 2): "))
+                moveCol = int(input("Please enter the column of your next move (0, 1, or 2): "))
                 break
             except:
                 print('')
