@@ -1,17 +1,10 @@
 import os
 
 # Globally define the board we are playing on.
-# Gameboard = [
-#     [' ', ' ', ' '],
-#     [' ', ' ', ' '],
-#     [' ', ' ', ' ']
-# ]
-
 Gameboard = [
-    [' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ']
+    [' ', ' ', ' '],
+    [' ', ' ', ' '],
+    [' ', ' ', ' ']
 ]
 
 # Terminal width for centering the playing board
