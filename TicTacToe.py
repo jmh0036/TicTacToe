@@ -1,10 +1,17 @@
 import os
 
 # Globally define the board we are playing on.
+# Gameboard = [
+#     [' ', ' ', ' '],
+#     [' ', ' ', ' '],
+#     [' ', ' ', ' ']
+# ]
+
 Gameboard = [
-    [' ', ' ', ' '],
-    [' ', ' ', ' '],
-    [' ', ' ', ' ']
+    [' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ']
 ]
 
 # Terminal width for centering the playing board
@@ -59,7 +66,10 @@ def PrintBoard(CurrentGame):
             row += ' ' + str(CurrentGame[i][j]) + ' |'
         print(row[:-1].center(TermWidth))
         if i < (len(CurrentGame) - 1):
-            print('---|---|---'.center(TermWidth))
+            Divisions = ''
+            for j in range(len(CurrentGame)):
+                Divisions += '---|'
+            print(Divisions[:-1].center(TermWidth))
     print('')
 
 # Get a valid input.  Takes in what round we are on, and returns the row and column the user inputs
@@ -70,8 +80,8 @@ def GetInput(round):
                     print('Player X, please choose your location.')
                 else:
                     print('Player O, please choose your location.')
-                moveRow = int(input("Please enter the row of your next move (0, 1, or 2): "))
-                moveCol = int(input("Please enter the column of your next move (0, 1, or 2): "))
+                moveRow = int(input("Please enter the row of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
+                moveCol = int(input("Please enter the column of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
                 break
             except:
                 print('')
