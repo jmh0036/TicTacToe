@@ -1,11 +1,15 @@
 import os
 
+Boardsize = 0
+while Boardsize < 1:
+    try:
+        Boardsize = int(input("How large of a board would you like? "))
+    except:
+        print('')
+        print("Not a valid integer.  Please enter an integer larger than 1.")
+
 # Globally define the board we are playing on.
-Gameboard = [
-    [' ', ' ', ' '],
-    [' ', ' ', ' '],
-    [' ', ' ', ' ']
-]
+Gameboard = [[' ' for i in range(Boardsize)] for j in range(Boardsize)]
 
 # Terminal width for centering the playing board
 TermWidth = os.get_terminal_size().columns
