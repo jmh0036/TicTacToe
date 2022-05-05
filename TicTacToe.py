@@ -3,7 +3,7 @@ import os
 Boardsize = 0
 while Boardsize < 1:
     try:
-        Boardsize = int(input("How large of a board would you like? "))
+        Boardsize = int(input("How large of a board would you like (positive integer)? "))
     except:
         print('')
         print("Not a valid integer.  Please enter an integer larger than 1.")
