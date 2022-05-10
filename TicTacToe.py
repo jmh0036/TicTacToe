@@ -1,6 +1,7 @@
 import os
 import random
 
+# Get input for how large a board to play on
 Boardsize = 0
 while Boardsize < 1:
     try:
@@ -9,6 +10,7 @@ while Boardsize < 1:
         print('')
         print("Not a valid integer.  Please enter an integer larger than 1.")
 
+# Get input for the number of players
 Players = 0
 while Players != 1 and Players != 2:
     try:
@@ -80,16 +82,20 @@ def PrintBoard(CurrentGame):
 
 # Get a valid input.  Takes in what round we are on, and returns the row and column the user inputs
 def GetInput(round):
+    # Set as empty for empty input
     moveRow = 'empty'
     moveCol = 'empty'
     # Two players no AI
     if Players == 2:
+        # while there is no input (in case someone hits enter without inputting data)
         while moveRow == 'empty' or moveCol == 'empty':
             try:
+                # Take turns
                 if round%2 == 0:
                     print('Player X, please choose your location.')
                 else:
                     print('Player O, please choose your location.')
+                # Get move data
                 moveRow = int(input("Please enter the row of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
                 moveCol = int(input("Please enter the column of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
             except:
@@ -99,35 +105,44 @@ def GetInput(round):
         return [moveRow, moveCol]
     # Single Player with AI
     else:
+        # while there is no input (in case someone hits enter without inputting data)
         while moveRow == 'empty' or moveCol == 'empty':
             try:
+                # Human's turn
                 if round%2 == 0:
                     print('Player X, please choose your location.')
                     moveRow = int(input("Please enter the row of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
                     moveCol = int(input("Please enter the column of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
+                # AI's turn
                 else:
-                    # If Odd size board, pick center if available
+                    # BestMove will contain the smart move if one is available
                     BestMove = []
 
+                    # If Odd size board, pick center if available
                     CenterSquare = (Boardsize-1)//2
                     if Boardsize%2 == 1 and Gameboard[CenterSquare][CenterSquare] == ' ':
                         moveRow = CenterSquare
                         moveCol = CenterSquare
                         BestMove = [CenterSquare, CenterSquare]
-                        print('pick the center!')
+                    # Comb through the Game to see if the next move causes a win.
                     for nextmoverow in range(Boardsize):
                         for nextmovecol in range(Boardsize):
                             if Gameboard[nextmoverow][nextmovecol] == ' ':
+                                # See if 'X' has a winning move
                                 Gameboard[nextmoverow][nextmovecol] = 'X'
                                 if CheckWinner(Gameboard) != 'No Winner':
                                     BestMove = [nextmoverow,nextmovecol]
+                                # See if 'O' has a winning move
                                 Gameboard[nextmoverow][nextmovecol] = 'O'
                                 if CheckWinner(Gameboard) != 'No Winner':
                                     BestMove = [nextmoverow,nextmovecol]
+                                # Be sure to clear out the pick that wasn't really made
                                 Gameboard[nextmoverow][nextmovecol] = ' '
+                    # No smart move
                     if BestMove == []:
                         moveRow = random.randint(0,Boardsize-1)
                         moveCol = random.randint(0,Boardsize-1)
+                    # Choose the smart move
                     else:
                         moveRow = BestMove[0]
                         moveCol = BestMove[1]
