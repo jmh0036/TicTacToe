@@ -82,19 +82,17 @@ def PrintBoard(CurrentGame):
 def GetInput(round):
     # Two players no AI
     if Players == 2:
-        while True:
-            try:
-                if round%2 == 0:
-                    print('Player X, please choose your location.')
-                else:
-                    print('Player O, please choose your location.')
-                moveRow = int(input("Please enter the row of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
-                moveCol = int(input("Please enter the column of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
-                break
-            except:
-                print('')
-                print("Not a valid number.  Please enter a valid number.")
-                PrintBoard(Gameboard)
+        try:
+            if round%2 == 0:
+                print('Player X, please choose your location.')
+            else:
+                print('Player O, please choose your location.')
+            moveRow = int(input("Please enter the row of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
+            moveCol = int(input("Please enter the column of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
+        except:
+            print('')
+            print("Not a valid number.  Please enter a valid number.")
+            PrintBoard(Gameboard)
         return [moveRow, moveCol]
     # Single Player with AI
     else:
@@ -111,6 +109,7 @@ def GetInput(round):
                     if Boardsize%2 == 1 and Gameboard[CenterSquare][CenterSquare] == ' ':
                         moveRow = CenterSquare
                         moveCol = CenterSquare
+                        print('pick the center!')
                         break
                     BestMove = []
                     for nextmoverow in range(Boardsize):
