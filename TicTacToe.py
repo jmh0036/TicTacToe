@@ -80,38 +80,41 @@ def PrintBoard(CurrentGame):
 
 # Get a valid input.  Takes in what round we are on, and returns the row and column the user inputs
 def GetInput(round):
+    moveRow = 'empty'
+    moveCol = 'empty'
     # Two players no AI
     if Players == 2:
-        try:
-            if round%2 == 0:
-                print('Player X, please choose your location.')
-            else:
-                print('Player O, please choose your location.')
-            moveRow = int(input("Please enter the row of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
-            moveCol = int(input("Please enter the column of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
-        except:
-            print('')
-            print("Not a valid number.  Please enter a valid number.")
-            PrintBoard(Gameboard)
+        while moveRow == 'empty' or moveCol == 'empty':
+            try:
+                if round%2 == 0:
+                    print('Player X, please choose your location.')
+                else:
+                    print('Player O, please choose your location.')
+                moveRow = int(input("Please enter the row of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
+                moveCol = int(input("Please enter the column of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
+            except:
+                print('')
+                print("Not a valid number.  Please enter a valid number.")
+                PrintBoard(Gameboard)
         return [moveRow, moveCol]
     # Single Player with AI
     else:
-        while True:
+        while moveRow == 'empty' or moveCol == 'empty':
             try:
                 if round%2 == 0:
                     print('Player X, please choose your location.')
                     moveRow = int(input("Please enter the row of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
                     moveCol = int(input("Please enter the column of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
-                    break
                 else:
                     # If Odd size board, pick center if available
+                    BestMove = []
+
                     CenterSquare = (Boardsize-1)//2
                     if Boardsize%2 == 1 and Gameboard[CenterSquare][CenterSquare] == ' ':
                         moveRow = CenterSquare
                         moveCol = CenterSquare
+                        BestMove = [CenterSquare, CenterSquare]
                         print('pick the center!')
-                        break
-                    BestMove = []
                     for nextmoverow in range(Boardsize):
                         for nextmovecol in range(Boardsize):
                             if Gameboard[nextmoverow][nextmovecol] == ' ':
@@ -125,16 +128,15 @@ def GetInput(round):
                     if BestMove == []:
                         moveRow = random.randint(0,Boardsize-1)
                         moveCol = random.randint(0,Boardsize-1)
-                        break
                     else:
                         moveRow = BestMove[0]
                         moveCol = BestMove[1]
-                        break
             except:
                 print('')
                 print("Not a valid number.  Please enter a valid number.")
                 PrintBoard(Gameboard)
-        return [moveRow, moveCol]
+
+        return [moveRow, moveCol]   
 
 PrintBoard(Gameboard)
 
