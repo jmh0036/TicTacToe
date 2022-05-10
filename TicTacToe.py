@@ -5,16 +5,16 @@ import random
 Boardsize = 0
 while Boardsize < 1:
     try:
-        Boardsize = int(input("How large of a board would you like (positive integer)? "))
+        Boardsize = int(input('How large of a board would you like (positive integer)? '))
     except:
         print('')
-        print("Not a valid integer.  Please enter an integer larger than 1.")
+        print('Not a valid integer.  Please enter an integer larger than 1.')
 
 # Get input for the number of players
 Players = 0
 while Players != 1 and Players != 2:
     try:
-        Players = int(input("How many players would you like to play (1 or 2)? "))
+        Players = int(input('How many players would you like to play (1 or 2)? '))
     except:
         print('')
         print('Not a valid input.  Please choose either 1 or 2 players.')
@@ -96,11 +96,11 @@ def GetInput(round):
                 else:
                     print('Player O, please choose your location.')
                 # Get move data
-                moveRow = int(input("Please enter the row of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
-                moveCol = int(input("Please enter the column of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
+                moveRow = int(input('Please enter the row of your next move (from 0 to ' + str(len(Gameboard)-1) + '): ' ))
+                moveCol = int(input('Please enter the column of your next move (from 0 to ' + str(len(Gameboard)-1) + '): ' ))
             except:
                 print('')
-                print("Not a valid number.  Please enter a valid number.")
+                print('Not a valid number.  Please enter a valid number.')
                 PrintBoard(Gameboard)
         return [moveRow, moveCol]
     # Single Player with AI
@@ -111,8 +111,8 @@ def GetInput(round):
                 # Human's turn
                 if round%2 == 0:
                     print('Player X, please choose your location.')
-                    moveRow = int(input("Please enter the row of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
-                    moveCol = int(input("Please enter the column of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
+                    moveRow = int(input('Please enter the row of your next move (from 0 to ' + str(len(Gameboard)-1) + '): ' ))
+                    moveCol = int(input('Please enter the column of your next move (from 0 to ' + str(len(Gameboard)-1) + '): ' ))
                 # AI's turn
                 else:
                     # BestMove will contain the smart move if one is available
@@ -150,7 +150,7 @@ def GetInput(round):
                         print('The commputer has chosen row', moveRow, 'column', moveCol)
             except:
                 print('')
-                print("Not a valid number.  Please enter a valid number.")
+                print('Not a valid number.  Please enter a valid number.')
                 PrintBoard(Gameboard)
 
         return [moveRow, moveCol]   
