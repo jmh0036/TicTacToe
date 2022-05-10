@@ -72,18 +72,18 @@ def PrintBoard(CurrentGame):
 # Get a valid input.  Takes in what round we are on, and returns the row and column the user inputs
 def GetInput(round):
     while True:
-            try:
-                if round%2 == 0:
-                    print('Player X, please choose your location.')
-                else:
-                    print('Player O, please choose your location.')
-                moveRow = int(input("Please enter the row of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
-                moveCol = int(input("Please enter the column of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
-                break
-            except:
-                print('')
-                print("Not a valid number.  Please enter a valid number.")
-                PrintBoard(Gameboard)
+        try:
+            if round%2 == 0:
+                print('Player X, please choose your location.')
+            else:
+                print('Player O, please choose your location.')
+            moveRow = int(input("Please enter the row of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
+            moveCol = int(input("Please enter the column of your next move (from 0 to " + str(len(Gameboard)-1) + '): ' ))
+            break
+        except:
+            print('')
+            print("Not a valid number.  Please enter a valid number.")
+            PrintBoard(Gameboard)
     return [moveRow, moveCol]
 
 PrintBoard(Gameboard)
