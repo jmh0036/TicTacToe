@@ -142,12 +142,12 @@ def GetInput(round):
                     if BestMove == []:
                         moveRow = random.randint(0,Boardsize-1)
                         moveCol = random.randint(0,Boardsize-1)
-                        print('The commputer has chosen row', moveRow, 'column', moveCol)
+                        print('The computer has chosen row', moveRow, 'column', moveCol)
                     # Choose the smart move
                     else:
                         moveRow = BestMove[0]
                         moveCol = BestMove[1]
-                        print('The commputer has chosen row', moveRow, 'column', moveCol)
+                        print('The computer has chosen row', moveRow, 'column', moveCol)
             except:
                 print('')
                 print('Not a valid number.  Please enter a valid number.')
